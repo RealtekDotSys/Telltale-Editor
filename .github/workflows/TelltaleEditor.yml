@@ -81,7 +81,14 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: TelltaleEditor-${{ matrix.os }}-${{ matrix.build_type }}
-        path: ${{ steps.strings.outputs.build-output-dir }}
+        path: |
+          ${{ steps.strings.outputs.build-output-dir }}/Release/*
+          ${{ steps.strings.outputs.build-output-dir }}/*.exe
+          ${{ steps.strings.outputs.build-output-dir }}/*.dll
+          ${{ steps.strings.outputs.build-output-dir }}/*.so
+          ${{ steps.strings.outputs.build-output-dir }}/*.dylib
+          ${{ steps.strings.outputs.build-output-dir }}/*.out
+
 
     - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
